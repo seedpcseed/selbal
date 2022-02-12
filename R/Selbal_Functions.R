@@ -395,13 +395,13 @@
   #----------------------------------------------------------------------------#
   # FINAL GLM
   #----------------------------------------------------------------------------#
-				  
+
     # Auxiliar data.frame for graphical representation
       U <- data.frame(dat, FINAL.BAL)
       colnames(U)[ncol(U)] <- "V1"
     # Regression model
-      FIT.final <- glm(numy~., data=U, family = f.class)				  
-				  
+      FIT.final <- glm(numy~., data=U, family = f.class)
+
   # Draw the plot if draw == T
   if (draw){
   #----------------------------------------------------------------------------#
@@ -438,7 +438,7 @@
                  colour = c("royalblue1",rep("black",length(T2)-1)),
                  fontface = 2)
 
-      # Parameter 2 to specify the limits for writting
+      # Parameter 2 to specify the limits for writing
       T1 <- c(POS,"A")
       T2 <- c(NEG,"B")
       yl2 <- max(length(T1), length(T2));
@@ -517,7 +517,7 @@
       # ROC - curve
        suppressMessages(library(pROC))
       # Build ROC curve
-        A<-roc(response = U$numy,predictor = FIT.final$fitted.values, quiet = TRUE)
+        A<-roc(response = U$numy,predictor = FIT.final$fitted.values)
       # Extract the sensitivity and specificiti values
         ROC.TAB <- data.frame(x=1-A$specificities, y=A$sensitivities)
       # Order them for a correct representation
@@ -543,7 +543,7 @@
         FINAL.P <- arrangeGrob(Imp.table, ROC.plot, BoxP, ydensity,
                                ncol=2, nrow=2, widths=c(5,1.25), heights=c(2, 5),
                                vp=viewport(width=0.8, height=0.8))
-        
+
         library(gtable)
         g1 <- ggplotGrob(Imp.table2)
         g2 <- ggplotGrob(BoxP2)
@@ -552,7 +552,7 @@
         g <- rbind(g, g3, size = "first")
         g$widths <- unit.pmax(g1$widths,g2$widths)
         FINAL.P2 <- g
-      
+
       } else {
 
         # Fit the regression model
@@ -1941,7 +1941,7 @@
       # ROC - curve
         library(pROC)
       # Build ROC curve
-        A<-roc(response = U$numy,predictor = FIT.final$fitted.values, quiet = TRUE)
+        A<-roc(response = U$numy,predictor = FIT.final$fitted.values)
       # Extract the sensitivity and specificity value
         ROC.TAB <- data.frame(x=1-A$specificities, y=A$sensitivities)
       # Order them for a correct representation
@@ -1977,8 +1977,8 @@
         g <- rbind(g, g3, size = "first")
         g$widths <- unit.pmax(g1$widths,g2$widths)
         FINAL.P2 <- g
-        
-        
+
+
         # Build a list with the elements of interest
         L <- list(Global.plot = FINAL.P,Global.plot2 = FINAL.P2, ROC.plot = ROC.plot)
 
