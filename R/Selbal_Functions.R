@@ -524,8 +524,8 @@
         ROC.TAB <- ROC.TAB[order(ROC.TAB$y),]
       # AUC value
         #auc.val <- round(logit.cor(FIT.final,y = U$numy, covar = covar, logit.acc = logit.acc),3)
-        #auc.val<-round(as.numeric(auc(y, FIT.final$fitted.values)),3)   # diferencies
-        auc.val<-round(as.numeric(auc(U$numy, FIT.final$fitted.values)),3)   # new diferencies
+        #auc.val<-round(as.numeric(auc(y, FIT.final$fitted.values)),3)   # differences
+        auc.val<-round(as.numeric(auc(U$numy, FIT.final$fitted.values)),3)   # new differences
       # The plot
         ROC.plot <- ggplot(data=ROC.TAB, aes(x=x, y=y)) +
                     geom_line() +
