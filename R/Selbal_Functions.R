@@ -524,7 +524,7 @@
         ROC.TAB <- ROC.TAB[order(ROC.TAB$y),]
       # AUC value
         #auc.val <- round(logit.cor(FIT.final,y = U$numy, covar = covar, logit.acc = logit.acc),3)
-        #auc.val<-round(as.numeric(auc(y, FIT.final$fitted.values, quiet=TRUE)),3)   # diferencies
+        #auc.val<-round(as.numeric(auc(y, FIT.final$fitted.values)),3)   # diferencies
         auc.val<-round(as.numeric(auc(U$numy, FIT.final$fitted.values)),3)   # new diferencies
       # The plot
         ROC.plot <- ggplot(data=ROC.TAB, aes(x=x, y=y)) +
@@ -878,7 +878,7 @@
             if (logit.acc == "AUC"){
               # Load library
                 library(pROC)
-                ACC <- apply(pred, 2, function(x) auc(y,x, quiet=TRUE))
+                ACC <- apply(pred, 2, function(x) auc(y,x))
             } else if(logit.acc == "Rsq"){
                 ACC <- apply(pred, 2, function(x) cor (y, x)^2)
             } else if (logit.acc == "Tjur"){
@@ -1948,9 +1948,9 @@
         ROC.TAB <- ROC.TAB[order(ROC.TAB$y),]
       # AUC value
         #auc.val <- round(logit.cor(FIT.final,y = U$numy, logit.acc = logit.acc),3)
-        #auc.val<-round(as.numeric(auc(y, FIT.final$fitted.values, quiet=TRUE)),3)  #diferencies
+        #auc.val<-round(as.numeric(auc(y, FIT.final$fitted.values)),3)  #diferencies
         if (class(y) == "factor") {numy<-as.numeric(y)-1} else {numy<-y} #new diferences
-        auc.val<-round(as.numeric(auc(numy, FIT.final$fitted.values, quiet=TRUE)),3)  #new diferencies
+        auc.val<-round(as.numeric(auc(numy, FIT.final$fitted.values)),3)  #new diferencies
       # The plot
         ROC.plot <- ggplot(data=ROC.TAB, aes(x=x, y=y)) +
           geom_line() +
@@ -2416,9 +2416,9 @@
   # Define the function logit.cor
   logit.cor <- function(FIT, y, covar = NULL,logit.acc){
     if (logit.acc == "AUC"){
-      #d <- as.numeric(auc(y, FIT$fitted.values, quiet=TRUE)) #
+      #d <- as.numeric(auc(y, FIT$fitted.values)) #
       if (class(y) == "factor") {numy<-as.numeric(y)-1} else {numy<-y} #new diferences
-      d <- as.numeric(auc(numy, FIT$fitted.values, quiet=TRUE)) # new diferences
+      d <- as.numeric(auc(numy, FIT$fitted.values)) # new diferences
     } else if (logit.acc == "Rsq"){
       d <- cor(as.numeric(y), FIT$fitted.values)^2
     } else if (logit.acc == "Tjur"){
