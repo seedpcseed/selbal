@@ -4,7 +4,7 @@
 # Define the function selbal
   selbal <- function(x, y, th.imp = 0, covar = NULL, logit.acc="AUC",
                      logt=T, col = c("steelblue1", "tomato1"), tab=T,
-                     draw=T, maxV = 1e10, zero.rep = "bayes"){
+                     draw=F, maxV = 1e10, zero.rep = "bayes"){
 
       # y1=as.numeric(y)
       # nulldev0<-deviance(glm(y1~1))
@@ -721,7 +721,7 @@
                         covar = NULL, col = c("steelblue1", "tomato1"),
                         col2 = c("darkgreen", "steelblue4","tan1"),
                         logit.acc = "AUC", maxV = 20, zero.rep = "bayes",
-                        opt.cri = "1se", user_numVar = NULL){
+                        opt.cri = "1se", user_numVar = NULL, draw = F){
 
     # Load package plyr
     suppressMessages(library(plyr))
@@ -1235,7 +1235,12 @@
               "\n###############################################################"))
 
     # Build a list with the elements of interest
-    L <- list(accuracy.nvar = MSE.Boxplot,
+    L <- list(NUM = NUM, DEN = DEN,
+              logc = logc, y = y,
+              covar = covar,
+              col = col, 
+              logit.acc = logit.acc,
+              accuracy.nvar = MSE.Boxplot,
               var.barplot = IMP.plot,
               global.plot = PLOT.Global$Global.plot,
               global.plot2 = PLOT.Global$Global.plot2,
